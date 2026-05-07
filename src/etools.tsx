@@ -50,9 +50,13 @@ export default function Command() {
       searchBarPlaceholder="Search Encompass Commands"
       searchBarAccessory={
         <List.Dropdown tooltip="Filter by Section" onChange={onChangeSection}>
-          <List.Dropdown.Item title={"All"} value={"all"}></List.Dropdown.Item>
+          <List.Dropdown.Item key={"83"} title={"All"} value={"all"}></List.Dropdown.Item>
           {alldata?.map((section) => (
-            <List.Dropdown.Item title={section.sectionTitle} value={section.value}></List.Dropdown.Item>
+            <List.Dropdown.Item
+              key={section.id}
+              title={section.sectionTitle}
+              value={section.value}
+            ></List.Dropdown.Item>
           ))}
         </List.Dropdown>
       }
