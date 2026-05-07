@@ -69,13 +69,12 @@ export default function Command() {
               keywords={command.keywords}
               actions={
                 <ActionPanel>
+                  <Action.Paste content={command.command} />
                   <Action
                     onAction={() => setShowDetail((value) => !value)}
                     title={showDetail ? "Hide Details" : "Show Details"}
                     shortcut={{ modifiers: ["cmd"], key: "d" }}
                   />
-
-                  <Action.Paste content={command.command} />
                 </ActionPanel>
               }
             ></List.Item>
