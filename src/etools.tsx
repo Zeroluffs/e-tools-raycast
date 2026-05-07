@@ -1,5 +1,5 @@
 import { showHUD, Clipboard, List, ActionPanel, Action } from "@raycast/api";
-
+import { useCachedPromise } from "@raycast/utils";
 const object = [
   {
     id: "1",
@@ -31,13 +31,30 @@ const object = [
   },
 ];
 
+export interface CommandInterface {
+  id: string;
+  title: string;
+  subtitle: string;
+  command: string;
+}
+export interface Section {
+  id: string;
+  sectionTitle: string;
+  subtitle: string;
+  commands: CommandInterface[];
+}
+export interface CommandsObject {
+  version: number;
+  commands: Section[];
+}
 export default function Command() {
-  const now = new Date();
-  // await Clipboard.copy(now.toLocaleDateString());
-  // await showHUD("Copied date to clipboard");
+  const { data, isLoading } = useCachedPromise(async () => {
+    const res = await fetch("https://raw.githubusercontent.com/Zeroluffs/e-comands/main/commands.json");
+    return res.json() as Promise<CommandsObject>;
+  });
   return (
-    <List navigationTitle="Search Commands" searchBarPlaceholder="Search Encompass Commands">
-      {object.map((section) => (
+    <List isLoading={isLoading} navigationTitle="Search Commands" searchBarPlaceholder="Search Encompass Commands">
+      {data?.commands?.map((section) => (
         <List.Section key={section.id} title={section.sectionTitle} subtitle={section.subtitle}>
           {section.commands.map((command) => (
             <List.Item
@@ -54,19 +71,6 @@ export default function Command() {
           ))}
         </List.Section>
       ))}
-      {/* {commands.map((c) => ( */}
-      {/*   <List.Item */}
-      {/*     key={c.id} */}
-      {/*     title={c.title} */}
-      {/*     subtitle={c.subtitle} */}
-      {/*     accessories={[{ text: c.command }]} */}
-      {/*     actions={ */}
-      {/*       <ActionPanel> */}
-      {/*         <Action.Paste content={c.command} /> */}
-      {/*       </ActionPanel> */}
-      {/*     } */}
-      {/*   /> */}
-      {/* ))} */}
     </List>
   );
 }
