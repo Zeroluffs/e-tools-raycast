@@ -1,35 +1,5 @@
-import { showHUD, Clipboard, List, ActionPanel, Action } from "@raycast/api";
+import { List, ActionPanel, Action } from "@raycast/api";
 import { useCachedPromise } from "@raycast/utils";
-const object = [
-  {
-    id: "1",
-    sectionTitle: "SSH Commands",
-    subtitle: "Connect to a VM via SSH",
-    commands: [
-      {
-        id: "1",
-        title: "Dev 3",
-        subtitle: "Connect to the dev 3 environment",
-
-        command: "ssh azureuser@encompass-one-vm-dev-3.eastus.cloudapp.azure.com",
-      },
-      {
-        id: "2",
-        title: "Dev 2",
-        subtitle: "Connect to the dev 2 environment",
-
-        command: "ssh azureuser@encompass-one-vm-dev-2.eastus.cloudapp.azure.com",
-      },
-      {
-        id: "3",
-        title: "Dev 1",
-        subtitle: "Connect to the dev 1 environment",
-
-        command: "ssh azureuser@encompass-one-vm-dev-1.eastus.cloudapp.azure.com",
-      },
-    ],
-  },
-];
 
 export interface CommandInterface {
   id: string;
